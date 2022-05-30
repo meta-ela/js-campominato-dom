@@ -28,3 +28,18 @@ main {
     background-color: var(--bg-cell-bomb-color);
     color: white;
 }
+
+.grid_container.easy {
+    width: calc(var(--cell-size) * 10);
+    height: calc(var(--cell-size) * 10);
+}
+
+.grid_container.medium {
+    width: calc(var(--cell-size) * 9);
+    height: calc(var(--cell-size) * 9);
+}
+
+.grid_container.hard {
+    width: calc(var(--cell-size) * 7);
+    height: calc(var(--cell-size) * 7);
+}

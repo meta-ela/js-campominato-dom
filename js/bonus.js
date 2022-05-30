@@ -35,6 +35,7 @@ let gameOver = false;
 let gamePoints = 0;
 
 const newGame = document.getElementById("new-game");
+const difficultyLevel = document.querySelector("[name=difficulty-game']");
 
 // click button e resetti il gioco a 0
 /* newGame.addEventListener("click", function() {
@@ -59,6 +60,22 @@ function randomNumberGenerator (num) {
     }
 
     return numberBombList;
+}
+
+function gameLevelDifficulty () {
+    const gameLevel = difficultyLevel.value;
+    switch (gameLevel) {
+        case "easy":
+            /* createGrid(10, 10); */
+            cellsGrid = 10 * 10;
+            break;
+        case "medium":
+            createGrid(9, 9);
+            break;
+        case "hard":
+            createGrid(7, 7);
+            break;
+    }
 }
 
 // funzione per generare la griglia 
@@ -106,7 +123,7 @@ function createGrid(xCells, yCells) {
 
 
 // le tre opzioni di griglia ma da impostare manualmente
-createGrid(10, 10);
+/* createGrid(10, 10); */
 /* createGrid(9, 9); */
 /* createGrid(7, 7); */
 
