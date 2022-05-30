@@ -30,7 +30,8 @@ BONUS:
     compresi nello stesso range della difficoltà prescelta.
 */
 
-// variabili globali:
+
+
 
 
 function randomNumberGenerator (num) {
@@ -88,29 +89,12 @@ function createGrid(xCells, yCells) {
         // scrive nei div dell'html il valore della variabile i 
         cell.innerHTML = `<span>${i}</span>`;
 
+        // this.innerText prende il testo all'interno 
+        /* console.log("cliccato ", this.innerText); -----> non consigliabile per leggere il contenuto html */
         // attributo che crea var nell'html 
         cell.dataset.index = i;
 
-
-        // al click sulle celle modifico l'aspetto aggiungendo/togliendo stili css
-        cell.addEventListener("click", function() {
-            // scriver this = variabile cell
-            // this.innerText prende il testo all'interno 
-            /* console.log("cliccato ", this.innerText); -----> non consigliabile per leggere il contenuto html */ 
-
-            // + davanti converte in numero = come parseInt
-            let cellIndex = +this.dataset.index;
-            console.log("hai cliccato la cella: " + cellIndex);
-
-            // i numeri dentro l'array devono corrispondere al nr della cella
-            // a cui aggiungere la classe css .bomb con gli stili necessari
-            if (numberBombList.includes(cellIndex)) {
-                cell.classList.add("bomb");
-            }
-
-            // aggiungo la classe css .clicked per le modifiche stilistiche
-            this.classList.add("clicked");
-        })
+        allCellEventListener(cell, numberBombList)
 
         // appende le celle create al container in html
         gridContainer.append(cell);
@@ -124,3 +108,46 @@ function createGrid(xCells, yCells) {
 /* createGrid(10, 10); */
 createGrid(9, 9);
 /* createGrid(7, 7); */
+
+
+
+let gameOver = false;
+let gamePoints = 0;
+
+// creare una suddivisione di function rende il codice più pulito 
+function allCellEventListener (cell, numberBombList) {
+    // al click sulle celle modifico l'aspetto aggiungendo/togliendo stili css
+    cell.addEventListener("click", function() {
+        
+        if (this.classList.contains("bomb") || this.classList.contains("clicked") || gameOver) {
+            return;
+            // chiude il click su tutti i 3 casi
+        }
+
+        // + davanti converte in numero = come parseInt
+        let cellIndex = +this.dataset.index;
+        console.log("hai cliccato la cella: " + cellIndex);
+
+        // i numeri dentro l'array devono corrispondere al nr della cella
+        // a cui aggiungere la classe css .bomb con gli stili necessari
+        if (numberBombList.includes(cellIndex)) {
+            cell.classList.add("bomb");
+
+            // booleano su true perchè classe bomb cliccata
+            gameOver = true;
+            //richiama la funzione infoGameResult per dare il punteggio
+            infoGameResult();
+        } else {
+            // aggiungo la classe css .clicked per le modifiche stilistiche
+            this.classList.add("clicked");
+            gamePoints++
+        }
+        
+    })
+}
+
+
+function infoGameResult () {
+    const resultGame = document.getElementById("result-game");
+    resultGame.innerHTML = `Peccato, hai perso! Hai azzeccato:  ${gamePoints} tentativi. Gioca ancora :)`;
+}
