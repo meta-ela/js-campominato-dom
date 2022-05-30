@@ -1,6 +1,7 @@
 :root {
     --bg-color: #7cffd2;
     --bg-cell-color: #6495f1;
+    --bg-cell-bomb-color: #dd0c39;
 
     --cell-size: 50px;
 }
@@ -18,7 +19,12 @@ main {
     align-items: center;
 }
 
-.grid_container .cell_clicked {
+.grid_container .cell.clicked {
     background-color: var(--bg-cell-color);
+    color: white;
+}
+
+.grid_container .cell.bomb {
+    background-color: var(--bg-cell-bomb-colorbg-cell-bomb-col);
     color: white;
 }

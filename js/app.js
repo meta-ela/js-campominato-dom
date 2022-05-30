@@ -21,29 +21,36 @@ BONUS:
 3- L’utente indica un livello di difficoltà in base al quale 
     viene generata una griglia di gioco quadrata, 
     in cui ogni cella contiene un numero tra quelli compresi in un range:
-    - con difficoltà 1 => tra 1 e 100
-    - con difficoltà 2 => tra 1 e 81
-    - con difficoltà 3 => tra 1 e 49
+    - con difficoltà 1 => tra 1 e 100   (10 x 10)
+    - con difficoltà 2 => tra 1 e 81    (9 x 9)
+    - con difficoltà 3 => tra 1 e 49    (7 x 7)
 4- al click con il tasto destro su una cella, inseriamo il flag 
     per indicare che la cella potrebbe avere una bomba
     Il computer deve generare 16 numeri casuali - cioè le bombe - 
     compresi nello stesso range della difficoltà prescelta.
-
-
-con difficoltà 1 => tra 1 e 100 -------- (10 x 10)
-con difficoltà 2 => tra 1 e 81  --------- (9 x 9)
-con difficoltà 3 => tra 1 e 49 -----------(7 x 7)
-
-- creare griglia di celle quadrate (x =  y)
-- ciclo for per 100 celle
-    - una cella è un div --> tramite innerhtml??
-    - 
-
 */
 
 // variabili globali:
-// per recuperare classe html che conterrà la griglia
-const gridContainer = document.querySelector(".grid_container");
+
+
+function randomNumberGenerator (num) {
+    // creo array vuoto su cui pushare 16 numeri random
+    let numberBombList = [];
+
+    while (numberBombList.length < 16) {
+        let createRandomNumber = Math.floor(Math.random() * num) + 1;
+
+        // genero numeri unici
+        if (!numberBombList.includes(createRandomNumber)) {
+            numberBombList.push(createRandomNumber);
+        };
+    }
+
+    return numberBombList;
+}
+
+
+
 
 
 
@@ -58,6 +65,9 @@ generateNumbers(); */
 
 // funzione per generare la griglia 
 function createGrid(xCells, yCells) {
+    // per recuperare classe html che conterrà la griglia
+    const gridContainer = document.querySelector(".grid_container");
+
     // moltiplicazione per creare x e y celle per la griglia
     const cellsGrid = xCells * yCells;
     console.log(cellsGrid);
@@ -69,23 +79,33 @@ function createGrid(xCells, yCells) {
     console.log(cellsGrid);
     gridContainer.style.width = `calc(var(--cell-size) * 10)`; */
 
+    // salvo i numeri random generati dentro la var array
+    const numberBombList = randomNumberGenerator(cellsGrid);
+    console.log(numberBombList);
+
+
     for (let i = 1; i <= cellsGrid; i++) {
         // crea tag div a cui appendere le celle
         const cell = document.createElement("div");
-
         // aggiunge alla variabile cell.js la classe cell.css con gli stili necessari
         cell.classList.add("cell");
-
         // scrive nei div dell'html il valore della variabile i 
         cell.innerHTML = `<span>${i}</span>`;
+
+        // attributo che crea var nell'html 
+        cell.dataset.index = i;
 
         // al click sulle celle modifico l'aspetto aggiungendo/togliendo stili css
         cell.addEventListener("click", function() {
             // scriver this = variabile cell
             // this.innerText prende il testo all'interno 
-            console.log("cliccato", this.innerText);
+            /* console.log("cliccato ", this.innerText); -----> non consigliabile per leggere il contenuto html */ 
+
+            // + davanti converte in numero = come parseInt
+            let cellIndex = +this.dataset.index;
+            console.log("hai cliccato la cella: " + cellIndex);
             // aggiungo la classe css .clicked per le modifiche stilistiche
-            this.classList.add("cell_clicked");
+            this.classList.add("clicked");
         })
 
         // appende le celle create al container in html
