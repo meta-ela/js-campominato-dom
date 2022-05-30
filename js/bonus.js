@@ -37,12 +37,12 @@ let gamePoints = 0;
 const newGame = document.getElementById("new-game");
 
 // click button e resetti il gioco a 0
-newGame.addEventListener("click", function() {
+/* newGame.addEventListener("click", function() {
     let gameOver = false;
     let gamePoints = 0;
     createGrid();
 
-})
+}) */
 
 
 function randomNumberGenerator (num) {
@@ -60,16 +60,6 @@ function randomNumberGenerator (num) {
 
     return numberBombList;
 }
-
-
-// funzione per generare i numeri con for loop  ---> crea un loop di 100 * 100 ??????????? 
-/* function generateNumbers() {
-    for(let i = 1; i <= 100; i++){
-        console.log(i);
-    }
-}
-generateNumbers(); */
-
 
 // funzione per generare la griglia 
 function createGrid(xCells, yCells) {
