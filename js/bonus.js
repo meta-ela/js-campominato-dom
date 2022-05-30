@@ -34,6 +34,15 @@ BONUS:
 let gameOver = false;
 let gamePoints = 0;
 
+const newGame = document.getElementById("new-game");
+
+// click button e resetti il gioco a 0
+newGame.addEventListener("click", function() {
+    let gameOver = false;
+    let gamePoints = 0;
+    createGrid();
+
+})
 
 
 function randomNumberGenerator (num) {
@@ -148,5 +157,5 @@ function allCellEventListener (cell, numberBombList) {
 
 function infoGameResult () {
     const resultGame = document.getElementById("result-game");
-    resultGame.innerHTML = `Peccato, hai perso! Hai azzeccato:  ${gamePoints} tentativi. Gioca ancora ricaricando la pagina :)`;
+    resultGame.innerHTML = `Peccato, hai perso! Hai azzeccato:  ${gamePoints} tentativi. Gioca ancora :)`;
 }
