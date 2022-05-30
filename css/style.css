@@ -1,0 +1,24 @@
+:root {
+    --bg-color: #7cffd2;
+    --bg-cell-color: #6495f1;
+
+    --cell-size: 70px;
+}
+
+main {
+    background-color: var(--bg-color);
+}
+
+.grid_container .cell {
+    width: var(--cell-size);
+    height: var(--cell-size);
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.grid_container .cell_clicked {
+    background-color: var(--bg-cell-color);
+    color: white;
+}
