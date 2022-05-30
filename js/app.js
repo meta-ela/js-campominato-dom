@@ -40,7 +40,7 @@ function randomNumberGenerator (num) {
     while (numberBombList.length < 16) {
         let createRandomNumber = Math.floor(Math.random() * num) + 1;
 
-        // genero numeri unici
+        // genero numeri unici 
         if (!numberBombList.includes(createRandomNumber)) {
             numberBombList.push(createRandomNumber);
         };
@@ -48,10 +48,6 @@ function randomNumberGenerator (num) {
 
     return numberBombList;
 }
-
-
-
-
 
 
 // funzione per generare i numeri con for loop  ---> crea un loop di 100 * 100 ??????????? 
@@ -79,7 +75,7 @@ function createGrid(xCells, yCells) {
     console.log(cellsGrid);
     gridContainer.style.width = `calc(var(--cell-size) * 10)`; */
 
-    // salvo i numeri random generati dentro la var array
+    // salvo i numeri random generati dalla function dentro la stessa var array
     const numberBombList = randomNumberGenerator(cellsGrid);
     console.log(numberBombList);
 
@@ -95,6 +91,7 @@ function createGrid(xCells, yCells) {
         // attributo che crea var nell'html 
         cell.dataset.index = i;
 
+
         // al click sulle celle modifico l'aspetto aggiungendo/togliendo stili css
         cell.addEventListener("click", function() {
             // scriver this = variabile cell
@@ -104,6 +101,13 @@ function createGrid(xCells, yCells) {
             // + davanti converte in numero = come parseInt
             let cellIndex = +this.dataset.index;
             console.log("hai cliccato la cella: " + cellIndex);
+
+            // i numeri dentro l'array devono corrispondere al nr della cella
+            // a cui aggiungere la classe css .bomb con gli stili necessari
+            if (numberBombList.includes(cellIndex)) {
+                cell.classList.add("bomb");
+            }
+
             // aggiungo la classe css .clicked per le modifiche stilistiche
             this.classList.add("clicked");
         })

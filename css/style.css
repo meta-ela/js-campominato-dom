@@ -25,6 +25,6 @@ main {
 }
 
 .grid_container .cell.bomb {
-    background-color: var(--bg-cell-bomb-colorbg-cell-bomb-col);
+    background-color: var(--bg-cell-bomb-color);
     color: white;
 }
